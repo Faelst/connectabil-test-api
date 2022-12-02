@@ -5,12 +5,14 @@ import {
   DELETE_JOB_VACANCY_BY_ID_USECASE,
   GET_ALL_JOB_VACANCY_USECASE,
   GET_JOB_VACANCY_BY_ID_USECASE,
+  UPDATE_JOB_VACANCY_BY_ID_USECASE,
 } from '@/infrastructure/usecases/providers/job-vacancy.providers';
 import { UseCase } from '@/infrastructure/usecases/usecases';
 import { CreateJobVacancyUseCases } from '@/usecases/job-vacancy/create.usecase';
 import { DeleteJobVacancyByIdUseCases } from '@/usecases/job-vacancy/delete-by-id';
 import { GetAllJobVacancyUseCases } from '@/usecases/job-vacancy/get-all.usecases';
 import { GetJobVacancyByIdUseCases } from '@/usecases/job-vacancy/get-by-id.usecase';
+import { UpdateJobVacancyUseCase } from '@/usecases/job-vacancy/update.usecase';
 import {
   Body,
   Controller,
@@ -19,9 +21,10 @@ import {
   Inject,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateJobVacancyDto } from './job-vacancy.dto';
+import { CreateJobVacancyDto, UpdateJobVacancyDto } from './job-vacancy.dto';
 
 @Controller('job-vacancy')
 @ApiTags('job-vacancy')
@@ -36,6 +39,9 @@ export class JobVacancyController {
 
     @Inject(GET_JOB_VACANCY_BY_ID_USECASE)
     private readonly getJobVacancyByIdUseCases: UseCase<GetJobVacancyByIdUseCases>,
+
+    @Inject(UPDATE_JOB_VACANCY_BY_ID_USECASE)
+    private readonly updateJobVacancyUseCase: UseCase<UpdateJobVacancyUseCase>,
 
     @Inject(DELETE_JOB_VACANCY_BY_ID_USECASE)
     private readonly deleteJobVacancyByIdUseCases: UseCase<DeleteJobVacancyByIdUseCases>,
@@ -72,6 +78,21 @@ export class JobVacancyController {
     const result = await this.getJobVacancyByIdUseCases
       .getInstance()
       .execute(id);
+
+    return result;
+  }
+
+  @Put(':id')
+  @ApiResponse({
+    status: 200,
+  })
+  async updateById(
+    @Param('id') id: string,
+    @Body() data: UpdateJobVacancyDto,
+  ): Promise<JobVacancy> {
+    const result = await this.updateJobVacancyUseCase
+      .getInstance()
+      .execute(id, data);
 
     return result;
   }

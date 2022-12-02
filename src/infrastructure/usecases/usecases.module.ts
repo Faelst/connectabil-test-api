@@ -18,6 +18,7 @@ import {
   GET_ALL_JOB_VACANCY_USECASE,
   GET_JOB_VACANCY_BY_ID_USECASE,
   jobVacancyUseCaseProviders,
+  UPDATE_JOB_VACANCY_BY_ID_USECASE,
 } from './providers/job-vacancy.providers';
 import {
   GET_ALL_JOB_ASSOCIATION_USECASE,
@@ -51,6 +52,7 @@ export class UsecasesModule {
         REMOVE_ASSOCIATION_JOB_USECASE,
         GET_ALL_JOB_ASSOCIATION_USECASE,
         UPDATE_COMPANY_BY_ID_USECASE,
+        UPDATE_JOB_VACANCY_BY_ID_USECASE,
       ],
     };
   }

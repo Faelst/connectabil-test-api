@@ -6,6 +6,7 @@ import {
   JobVacancy,
   JobVacancy as JobVacancyModel,
 } from '../config/database/schemas';
+import { UpdateJobVacancyDto } from '../controllers/job-vacancy/job-vacancy.dto';
 
 export class JobVacancyRepository implements IJobVacancyRepository {
   constructor(
@@ -21,15 +22,17 @@ export class JobVacancyRepository implements IJobVacancyRepository {
 
   async update(
     id: string,
-    data: {
-      title?: string;
-      description?: string;
-      status?: boolean;
-    },
+    data: UpdateJobVacancyDto,
   ): Promise<JobVacancyModel> {
-    const result = await this.jobVacancyModel.findByIdAndUpdate(id, data, {
-      new: true,
-    });
+    const result = await this.jobVacancyModel.findByIdAndUpdate(
+      id,
+      {
+        ...data,
+      },
+      {
+        new: true,
+      },
+    );
 
     return result;
   }
