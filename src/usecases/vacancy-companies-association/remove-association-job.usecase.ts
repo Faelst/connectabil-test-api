@@ -1,6 +1,4 @@
 import { ExceptionsService } from '@/infrastructure/exceptions/exceptions.service';
-import { CompaniesRepository } from '@/infrastructure/repositories/companies.repository';
-import { JobVacancyRepository } from '@/infrastructure/repositories/job-vacancy.repository';
 import { VacancyCompaniesAssociationRepository } from '@/infrastructure/repositories/vacancy-companies-association.repository';
 
 export class RemoveAssociationJobUseCases {
