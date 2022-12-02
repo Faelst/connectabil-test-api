@@ -1,4 +1,4 @@
-import { CompaniesModel } from '@/domain/model';
+import { CompaniesModel } from '../../domain/model';
 import { Companies } from '@/infrastructure/config/database/schemas';
 
 import { CompaniesRepository } from '@/infrastructure/repositories/companies.repository';
