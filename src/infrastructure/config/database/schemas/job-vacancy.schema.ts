@@ -6,13 +6,6 @@ export type JobVacancyDocument = HydratedDocument<JobVacancy>;
 
 @Schema()
 export class JobVacancy {
-  @Prop({
-    type: Types.ObjectId,
-    required: true,
-    default: () => Types.ObjectId,
-  })
-  _id: Types.ObjectId;
-
   @Prop({ type: String, required: true })
   title: string;
 

@@ -7,13 +7,6 @@ export type VacancyCompaniesAssociationDocument =
 
 @Schema()
 export class VacancyCompaniesAssociation {
-  @Prop({
-    type: Types.ObjectId,
-    required: true,
-    default: () => Types.ObjectId,
-  })
-  _id: Types.ObjectId;
-
   @Prop({ type: Types.ObjectId, required: true })
   companyId: Types.ObjectId;
 

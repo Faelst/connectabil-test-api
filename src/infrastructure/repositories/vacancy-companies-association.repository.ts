@@ -36,4 +36,50 @@ export class VacancyCompaniesAssociationRepository
       { deleted: true, updatedAt: new Date() },
     );
   }
+
+  async getAll() {
+    const result = await this.vacancyCompaniesAssociation.aggregate([
+      {
+        $match: {
+          deleted: false,
+        },
+      },
+      {
+        $addFields: {
+          companyId: { $toObjectId: '$companyId' },
+          jobVacancyId: { $toObjectId: '$jobVacancyId' },
+        },
+      },
+      {
+        $lookup: {
+          from: 'companies',
+          localField: 'companyId',
+          foreignField: '_id',
+          as: 'company',
+        },
+      },
+      {
+        $lookup: {
+          from: 'jobvacancies',
+          localField: 'jobVacancyId',
+          foreignField: '_id',
+          as: 'jobVacancy',
+        },
+      },
+      {
+        $unwind: {
+          path: '$company',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $unwind: {
+          path: '$jobVacancy',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+    ]);
+
+    return result;
+  }
 }
