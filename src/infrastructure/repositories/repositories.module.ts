@@ -4,9 +4,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import {
   Companies as CompaniesModel,
   CompaniesSchema,
+  JobVacancy as JobVacancyModel,
+  JobVacancySchema,
 } from '../config/database/schemas';
 
 import { CompaniesRepository } from './companies.repository';
+import { JobVacancyRepository } from './job-vacancy.repository';
 
 @Module({
   imports: [
@@ -15,9 +18,13 @@ import { CompaniesRepository } from './companies.repository';
         name: CompaniesModel.name,
         schema: CompaniesSchema,
       },
+      {
+        name: JobVacancyModel.name,
+        schema: JobVacancySchema,
+      },
     ]),
   ],
-  providers: [CompaniesRepository],
-  exports: [CompaniesRepository],
+  providers: [CompaniesRepository, JobVacancyRepository],
+  exports: [CompaniesRepository, JobVacancyRepository],
 })
 export class RepositoriesModule {}

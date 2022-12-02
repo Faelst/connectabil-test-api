@@ -42,10 +42,10 @@ export class CompaniesController {
     description: 'The record has been successfully created.',
   })
   @ApiResponse({ status: 400, description: 'Bad request.' })
-  async create(@Body() company: CreateCompanyDto): Promise<Companies> {
+  async create(@Body() bodyData: CreateCompanyDto): Promise<Companies> {
     return await this.createCompanyUseCases
       .getInstance()
-      .execute(company as CompaniesModel);
+      .execute(bodyData as CompaniesModel);
   }
 
   @Get()

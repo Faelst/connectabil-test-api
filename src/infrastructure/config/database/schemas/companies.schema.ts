@@ -24,7 +24,7 @@ export class Companies {
   @Prop({ type: Date })
   updatedAt: Date;
 
-  @Prop({ type: Boolean })
+  @Prop({ type: Boolean, default: false })
   deleted: boolean;
 }
 

@@ -2,10 +2,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import { Types } from 'mongoose';
 
-export type JobVacancyDocument = HydratedDocument<JobVacancyModel>;
+export type JobVacancyDocument = HydratedDocument<JobVacancy>;
 
 @Schema()
-export class JobVacancyModel {
+export class JobVacancy {
   @Prop({ type: Types.ObjectId })
   _id: Types.ObjectId;
 
@@ -27,8 +27,8 @@ export class JobVacancyModel {
   @Prop({ type: Date })
   updatedAt: Date;
 
-  @Prop({ type: Boolean })
+  @Prop({ type: Boolean, default: false })
   deleted: boolean;
 }
 
-export const JobVacancySchema = SchemaFactory.createForClass(JobVacancyModel);
+export const JobVacancySchema = SchemaFactory.createForClass(JobVacancy);

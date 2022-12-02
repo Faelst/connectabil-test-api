@@ -33,25 +33,23 @@ export class CompaniesRepository implements ICompaniesRepository {
   }
 
   async delete(id: string): Promise<CompaniesModel> {
-    const result = await this.companiesModel.findByIdAndDelete(id);
+    const result = await this.companiesModel.findByIdAndUpdate(
+      id,
+      { deleted: true, updatedAt: new Date() },
+      { new: true },
+    );
 
     return result;
   }
 
   async findAll(): Promise<CompaniesModel[]> {
-    const result = await this.companiesModel.find();
+    const result = await this.companiesModel.find({ deleted: false });
 
     return result;
   }
 
   async findById(id: string): Promise<CompaniesModel> {
     const result = await this.companiesModel.findById(id);
-
-    return result;
-  }
-
-  async deleteById(id: string): Promise<CompaniesModel> {
-    const result = await this.companiesModel.findByIdAndDelete(id);
 
     return result;
   }
