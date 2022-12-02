@@ -5,7 +5,7 @@ on:
     branches: ['master']
 
 jobs:
-  build:
+  Build:
     name: build
     runs-on: ubuntu-latest
     environment: production
@@ -25,27 +25,20 @@ jobs:
       - run: npm run build --if-present
       # - run: npm test
 
-  deploy:
+  Deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
-        uses: gonuit/heroku-docker-deploy@v1.3.3 # GitHub action name (leave it as it is).
-        with:
-          email: ${{ secrets.HEROKU_EMAIL }}
-
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-
-          dockerfile_directory: ./
-
-          dockerfile_name: Dockerfile
-
-          docker_options: '--no-cache'
-
-          # (Optional, default: "web")
-          # Select the process type for which you want the docker container to be uploaded.
-          # By default, this argument is set to "web".
-          # For more information look at https://devcenter.heroku.com/articles/process-model
-          process_type: web
+      - uses: actions/checkout@v3
+      - name: Deploy to Heroku container registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+      - name: Build and push Docker image
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:push web --app ${{ secrets.HEROKU_APP_NAME }}
+      - name: Release Docker image
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web
