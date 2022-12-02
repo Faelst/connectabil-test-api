@@ -2,4 +2,7 @@ import { VacancyCompaniesAssociation } from '@/infrastructure/config/database/sc
 
 export type IVacancyCompaniesAssociationRepository = {
   create: (data: VacancyCompaniesAssociation) => Promise<void>;
+  findByCompanyId: (
+    companyId: string,
+  ) => Promise<VacancyCompaniesAssociation[]>;
 };

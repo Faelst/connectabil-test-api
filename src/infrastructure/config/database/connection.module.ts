@@ -5,13 +5,13 @@ import { EnvironmentConfigService } from '../environment-config/environment-conf
 
 const MONGO_CONNECTION = MongooseModule.forRootAsync({
   imports: [EnvironmentConfigModule],
-  useFactory: async (environmentConfigService) => ({
-    uri: environmentConfigService.get('MONGO_URI'),
-  }),
   inject: [EnvironmentConfigService],
+  useFactory: async (environmentConfigService) => ({
+    uri: environmentConfigService.getUri(),
+  }),
 });
 
 @Module({
-  imports: [EnvironmentConfigModule, MONGO_CONNECTION],
+  imports: [MONGO_CONNECTION, EnvironmentConfigModule],
 })
 export class ConnectionModule {}

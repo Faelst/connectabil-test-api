@@ -12,7 +12,6 @@ import {
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCompanyDto, UpdateCompanyDto } from './companies.dto';
-import { UsecasesModule } from '@/infrastructure/usecases/usecases.module';
 import { GetAllCompaniesUseCases } from '@/usecases/companies/get-all.usecase';
 import { GetCompanyByIdUseCases } from '@/usecases/companies/get-by-id.usecase';
 import { DeleteCompanyByIdUseCases } from '@/usecases/companies/delete-by-id';
@@ -24,7 +23,7 @@ import {
   GET_ALL_COMPANIES_USECASE,
   GET_COMPANY_BY_ID_USECASE,
   UPDATE_COMPANY_BY_ID_USECASE,
-} from '@/infrastructure/usecases/providers/Companies.providers';
+} from '@/infrastructure/usecases/providers/companies.providers';
 import { UpdateCompanyUseCase } from '@/usecases/companies/update.usecase';
 
 @Controller('companies')

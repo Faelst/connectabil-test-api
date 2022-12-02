@@ -1,5 +1,6 @@
 import { ExceptionsService } from '@/infrastructure/exceptions/exceptions.service';
 import { CompaniesRepository } from '@/infrastructure/repositories/companies.repository';
+import { VacancyCompaniesAssociationRepository } from '@/infrastructure/repositories/vacancy-companies-association.repository';
 import { CreateCompanyUseCases } from '@/usecases/companies/create.usecase';
 import { DeleteCompanyByIdUseCases } from '@/usecases/companies/delete-by-id';
 import { GetAllCompaniesUseCases } from '@/usecases/companies/get-all.usecase';
@@ -36,10 +37,24 @@ export const companiesUseCaseProviders = [
     },
   },
   {
-    inject: [CompaniesRepository],
+    inject: [
+      CompaniesRepository,
+      VacancyCompaniesAssociationRepository,
+      ExceptionsService,
+    ],
     provide: DELETE_COMPANY_BY_ID_USECASE,
-    useFactory: (companiesRepository: CompaniesRepository) => {
-      return new UseCase(new DeleteCompanyByIdUseCases(companiesRepository));
+    useFactory: (
+      companiesRepository: CompaniesRepository,
+      vacancyCompaniesAssociationRepository: VacancyCompaniesAssociationRepository,
+      exceptionService: ExceptionsService,
+    ) => {
+      return new UseCase(
+        new DeleteCompanyByIdUseCases(
+          companiesRepository,
+          vacancyCompaniesAssociationRepository,
+          exceptionService,
+        ),
+      );
     },
   },
   {

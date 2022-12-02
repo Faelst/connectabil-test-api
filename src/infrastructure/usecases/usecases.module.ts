@@ -11,7 +11,7 @@ import {
   GET_ALL_COMPANIES_USECASE,
   GET_COMPANY_BY_ID_USECASE,
   UPDATE_COMPANY_BY_ID_USECASE,
-} from './providers/Companies.providers';
+} from './providers/companies.providers';
 import {
   CREATE_JOB_VACANCY_USECASE,
   DELETE_JOB_VACANCY_BY_ID_USECASE,

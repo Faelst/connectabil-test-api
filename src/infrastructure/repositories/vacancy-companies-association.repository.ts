@@ -15,6 +15,14 @@ export class VacancyCompaniesAssociationRepository
     await this.vacancyCompaniesAssociation.create(vacancyCompaniesAssociation);
   }
 
+  async findByCompanyId(companyId: string) {
+    const result = await this.vacancyCompaniesAssociation.find({
+      companyId,
+    });
+
+    return result;
+  }
+
   async findByCompanyIdAndJobVacancyId({ companyId, jobVacancyId }) {
     const result = await this.vacancyCompaniesAssociation.findOne({
       companyId,
