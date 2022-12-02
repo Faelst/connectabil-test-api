@@ -8,9 +8,10 @@ import {
   Inject,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateCompanyDto } from './companies.dto';
+import { CreateCompanyDto, UpdateCompanyDto } from './companies.dto';
 import { UsecasesModule } from '@/infrastructure/usecases/usecases.module';
 import { GetAllCompaniesUseCases } from '@/usecases/companies/get-all.usecase';
 import { GetCompanyByIdUseCases } from '@/usecases/companies/get-by-id.usecase';
@@ -22,7 +23,9 @@ import {
   DELETE_COMPANY_BY_ID_USECASE,
   GET_ALL_COMPANIES_USECASE,
   GET_COMPANY_BY_ID_USECASE,
+  UPDATE_COMPANY_BY_ID_USECASE,
 } from '@/infrastructure/usecases/providers/Companies.providers';
+import { UpdateCompanyUseCase } from '@/usecases/companies/update.usecase';
 
 @Controller('companies')
 @ApiTags('companies')
@@ -37,6 +40,9 @@ export class CompaniesController {
 
     @Inject(GET_COMPANY_BY_ID_USECASE)
     private readonly getCompanyByIdUseCases: UseCase<GetCompanyByIdUseCases>,
+
+    @Inject(UPDATE_COMPANY_BY_ID_USECASE)
+    private readonly updateCompanyUseCase: UseCase<UpdateCompanyUseCase>,
 
     @Inject(DELETE_COMPANY_BY_ID_USECASE)
     private readonly deleteCompanyByIdUseCases: UseCase<DeleteCompanyByIdUseCases>,
@@ -58,7 +64,7 @@ export class CompaniesController {
   @ApiResponse({
     status: 200,
   })
-  async getAll(): Promise<any> {
+  async getAll(): Promise<Companies[]> {
     return await this.getAllCompaniesUseCases.getInstance().execute();
   }
 
@@ -66,7 +72,7 @@ export class CompaniesController {
   @ApiResponse({
     status: 200,
   })
-  async getById(@Param('id') id: string): Promise<any> {
+  async getById(@Param('id') id: string): Promise<Companies> {
     return await this.getCompanyByIdUseCases.getInstance().execute(id);
   }
 
@@ -74,7 +80,18 @@ export class CompaniesController {
   @ApiResponse({
     status: 200,
   })
-  async deleteById(@Param('id') id: string): Promise<any> {
+  async deleteById(@Param('id') id: string): Promise<Companies> {
     return await this.deleteCompanyByIdUseCases.getInstance().execute(id);
+  }
+
+  @Put(':id')
+  @ApiResponse({
+    status: 200,
+  })
+  async updateById(
+    @Param('id') id: string,
+    @Body() data: UpdateCompanyDto,
+  ): Promise<Companies> {
+    return await this.updateCompanyUseCase.getInstance().execute(id, data);
   }
 }
