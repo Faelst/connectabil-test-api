@@ -2,7 +2,7 @@ import { ExceptionsService } from '@/infrastructure/exceptions/exceptions.servic
 import { CompaniesRepository } from '@/infrastructure/repositories/companies.repository';
 import { VacancyCompaniesAssociationRepository } from '@/infrastructure/repositories/vacancy-companies-association.repository';
 import { CreateCompanyUseCases } from '@/usecases/companies/create.usecase';
-import { DeleteCompanyByIdUseCases } from '@/usecases/companies/delete-by-id';
+import { DeleteCompanyByIdUseCases } from '@/usecases/companies/delete-by-id.usecase';
 import { GetAllCompaniesUseCases } from '@/usecases/companies/get-all.usecase';
 import { GetCompanyByIdUseCases } from '@/usecases/companies/get-by-id.usecase';
 import { UpdateCompanyUseCase } from '@/usecases/companies/update.usecase';

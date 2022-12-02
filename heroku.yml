@@ -1,7 +1,5 @@
 build:
   docker:
     web: Dockerfile
-release:
-  image: web
-  command:
-    - npm run start:prod
+run:
+  web: npm run start:prod

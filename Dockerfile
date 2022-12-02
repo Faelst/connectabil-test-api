@@ -1,24 +1,16 @@
-FROM node:16.8-alpine3.11 as builder
+# Base image
+FROM node:16.18
 
-ENV NODE_ENV build
+WORKDIR /usr/src/app
 
-WORKDIR /home/node
+COPY package*.json ./
 
-COPY . /home/node
+RUN npm install
 
-RUN npm ci \
-    && npm i -g nest-cli \
-    && npm run build
+COPY . .
 
-FROM node:16.8-alpine3.11
+RUN rm -rf env/local.env
 
-ENV NODE_ENV production
+RUN npm run build
 
-USER node
-WORKDIR /home/node
-
-COPY --from=builder /home/node/package*.json /home/node/
-COPY --from=builder /home/node/node_modules/ /home/node/node_modules/
-COPY --from=builder /home/node/dist/ /home/node/dist/
-
-CMD ["node", "dist/main.js"]
+CMD [ "node", "dist/main.js" ]

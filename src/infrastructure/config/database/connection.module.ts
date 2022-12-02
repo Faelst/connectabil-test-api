@@ -7,7 +7,6 @@ const MONGO_CONNECTION = MongooseModule.forRootAsync({
   imports: [EnvironmentConfigModule],
   inject: [EnvironmentConfigService],
   useFactory: async (environmentConfigService) => {
-    console.log(environmentConfigService.getUri('MONGO_URL'));
     return {
       uri: environmentConfigService.getUri(),
     };

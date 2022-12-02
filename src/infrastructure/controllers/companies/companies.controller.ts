@@ -14,7 +14,7 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCompanyDto, UpdateCompanyDto } from './companies.dto';
 import { GetAllCompaniesUseCases } from '@/usecases/companies/get-all.usecase';
 import { GetCompanyByIdUseCases } from '@/usecases/companies/get-by-id.usecase';
-import { DeleteCompanyByIdUseCases } from '@/usecases/companies/delete-by-id';
+import { DeleteCompanyByIdUseCases } from '@/usecases/companies/delete-by-id.usecase';
 import { Companies } from '@/infrastructure/config/database/schemas';
 import { CompaniesModel } from '@/domain/model';
 import {
