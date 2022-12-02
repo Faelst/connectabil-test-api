@@ -14,13 +14,7 @@ export class JobVacancyRepository implements IJobVacancyRepository {
   ) {}
 
   async create(jobVacancy: JobVacancyModel): Promise<JobVacancyModel> {
-    const result = await this.jobVacancyModel.create({
-      _id: randomUUID(),
-      title: jobVacancy.title,
-      description: jobVacancy.description,
-      status: jobVacancy.status,
-      type: jobVacancy.type,
-    });
+    const result = await this.jobVacancyModel.create(jobVacancy);
 
     return result;
   }
@@ -56,7 +50,10 @@ export class JobVacancyRepository implements IJobVacancyRepository {
   }
 
   async findById(id: string): Promise<JobVacancyModel> {
-    const result = await this.jobVacancyModel.findById(id);
+    const result = await this.jobVacancyModel.findOne({
+      _id: id,
+      deleted: false,
+    });
     return result;
   }
 }

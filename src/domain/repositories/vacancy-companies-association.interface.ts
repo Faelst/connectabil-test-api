@@ -1,5 +1,5 @@
-import { VacancyCompaniesAssociationModel } from '@/infrastructure/config/database/schemas/vacancy-companies-association.schema';
-import { BaseInterface } from './base.interface';
+import { VacancyCompaniesAssociation } from '@/infrastructure/config/database/schemas/vacancy-companies-association.schema';
 
-export type IVacancyCompaniesAssociationRepository =
-  BaseInterface<VacancyCompaniesAssociationModel>;
+export type IVacancyCompaniesAssociationRepository = {
+  create: (data: VacancyCompaniesAssociation) => Promise<void>;
+};

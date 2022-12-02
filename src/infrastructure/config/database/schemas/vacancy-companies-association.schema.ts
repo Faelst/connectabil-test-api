@@ -3,11 +3,15 @@ import { HydratedDocument } from 'mongoose';
 import { Types } from 'mongoose';
 
 export type VacancyCompaniesAssociationDocument =
-  HydratedDocument<VacancyCompaniesAssociationModel>;
+  HydratedDocument<VacancyCompaniesAssociation>;
 
 @Schema()
-export class VacancyCompaniesAssociationModel {
-  @Prop({ type: Types.ObjectId })
+export class VacancyCompaniesAssociation {
+  @Prop({
+    type: Types.ObjectId,
+    required: true,
+    default: () => Types.ObjectId,
+  })
   _id: Types.ObjectId;
 
   @Prop({ type: Types.ObjectId, required: true })
@@ -27,5 +31,5 @@ export class VacancyCompaniesAssociationModel {
 }
 
 export const VacancyCompaniesAssociationSchema = SchemaFactory.createForClass(
-  VacancyCompaniesAssociationModel,
+  VacancyCompaniesAssociation,
 );

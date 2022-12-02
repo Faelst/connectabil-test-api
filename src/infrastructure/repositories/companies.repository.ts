@@ -14,12 +14,7 @@ export class CompaniesRepository implements ICompaniesRepository {
   ) {}
 
   async create(company: CompaniesModel): Promise<CompaniesModel> {
-    const result = await this.companiesModel.create({
-      _id: randomUUID(),
-      name: company.name,
-      address: company.address,
-      status: company.status,
-    });
+    const result = await this.companiesModel.create(company);
 
     return result;
   }
@@ -49,7 +44,10 @@ export class CompaniesRepository implements ICompaniesRepository {
   }
 
   async findById(id: string): Promise<CompaniesModel> {
-    const result = await this.companiesModel.findById(id);
+    const result = await this.companiesModel.findOne({
+      _id: id,
+      deleted: false,
+    });
 
     return result;
   }

@@ -14,6 +14,9 @@ import { CreateJobVacancyUseCases } from '@/usecases/job-vacancy/create.usecase'
 import { GetAllJobVacancyUseCases } from '@/usecases/job-vacancy/get-all.usecases';
 import { GetJobVacancyByIdUseCases } from '@/usecases/job-vacancy/get-by-id.usecase';
 import { DeleteJobVacancyByIdUseCases } from '@/usecases/job-vacancy/delete-by-id';
+import { VacancyCompaniesAssociationRepository } from '../repositories/vacancy-companies-association.repository';
+import { PostNewJobVacancyAssociationUseCases } from '@/usecases/vacancy-companies-association/post-new-job.usecase';
+import { ExceptionsService } from '../exceptions/exceptions.service';
 
 @Module({
   imports: [EnvironmentConfigModule, RepositoriesModule, ExceptionsModule],
@@ -28,6 +31,9 @@ export class UsecasesModule {
   static GET_ALL_JOB_VACANCY_USECASE = 'GetAllJobVacancyUseCases';
   static GET_JOB_VACANCY_BY_ID_USECASE = 'GetJobVacancyByIdUseCases';
   static DELETE_JOB_VACANCY_BY_ID_USECASE = 'DeleteJobVacancyByIdUseCases';
+
+  static POST_NEW_JOB_VACANCY_ASSOCIATION_USECASE =
+    'PostNewJobVacancyAssociationUseCases';
 
   static register(): DynamicModule {
     return {
@@ -101,6 +107,30 @@ export class UsecasesModule {
             );
           },
         },
+        {
+          inject: [
+            VacancyCompaniesAssociationRepository,
+            JobVacancyRepository,
+            CompaniesRepository,
+            ExceptionsService,
+          ],
+          provide: UsecasesModule.POST_NEW_JOB_VACANCY_ASSOCIATION_USECASE,
+          useFactory: (
+            vacancyCompaniesAssociationRepository: VacancyCompaniesAssociationRepository,
+            jobVacancyRepository: JobVacancyRepository,
+            companiesRepository: CompaniesRepository,
+            exceptionsService: ExceptionsService,
+          ) => {
+            return new UseCase(
+              new PostNewJobVacancyAssociationUseCases(
+                vacancyCompaniesAssociationRepository,
+                jobVacancyRepository,
+                companiesRepository,
+                exceptionsService,
+              ),
+            );
+          },
+        },
       ],
       exports: [
         UsecasesModule.CREATE_COMPANY_USECASE,
@@ -111,6 +141,7 @@ export class UsecasesModule {
         UsecasesModule.GET_ALL_JOB_VACANCY_USECASE,
         UsecasesModule.GET_JOB_VACANCY_BY_ID_USECASE,
         UsecasesModule.DELETE_JOB_VACANCY_BY_ID_USECASE,
+        UsecasesModule.POST_NEW_JOB_VACANCY_ASSOCIATION_USECASE,
       ],
     };
   }

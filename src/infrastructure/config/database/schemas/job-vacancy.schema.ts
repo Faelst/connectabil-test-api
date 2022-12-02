@@ -6,7 +6,11 @@ export type JobVacancyDocument = HydratedDocument<JobVacancy>;
 
 @Schema()
 export class JobVacancy {
-  @Prop({ type: Types.ObjectId })
+  @Prop({
+    type: Types.ObjectId,
+    required: true,
+    default: () => Types.ObjectId,
+  })
   _id: Types.ObjectId;
 
   @Prop({ type: String, required: true })
@@ -24,7 +28,7 @@ export class JobVacancy {
   @Prop({ type: Date, default: Date.now })
   createdAt: Date;
 
-  @Prop({ type: Date })
+  @Prop({ type: Date, default: null })
   updatedAt: Date;
 
   @Prop({ type: Boolean, default: false })
