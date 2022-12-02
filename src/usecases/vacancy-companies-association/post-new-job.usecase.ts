@@ -41,9 +41,15 @@ export class PostNewJobVacancyAssociationUseCases {
       jobVacancyId,
     );
 
-    if (!activeJobVacancy || !activeJobVacancy.status) {
+    if (!activeJobVacancy) {
       this.exceptionService.badRequestException({
         message: 'Job vacancy not found',
+      });
+    }
+
+    if (!activeJobVacancy.status) {
+      this.exceptionService.badRequestException({
+        message: 'Job vacancy is not active',
       });
     }
 
