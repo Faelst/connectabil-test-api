@@ -17,22 +17,28 @@ import { GetCompanyByIdUseCases } from '@/usecases/companies/get-by-id.usecase';
 import { DeleteCompanyByIdUseCases } from '@/usecases/companies/delete-by-id';
 import { Companies } from '@/infrastructure/config/database/schemas';
 import { CompaniesModel } from '@/domain/model';
+import {
+  CREATE_COMPANY_USECASE,
+  DELETE_COMPANY_BY_ID_USECASE,
+  GET_ALL_COMPANIES_USECASE,
+  GET_COMPANY_BY_ID_USECASE,
+} from '@/infrastructure/usecases/providers/Companies.providers';
 
 @Controller('companies')
 @ApiTags('companies')
 @ApiResponse({ status: 500, description: 'Internal error' })
 export class CompaniesController {
   constructor(
-    @Inject(UsecasesModule.CREATE_COMPANY_USECASE)
+    @Inject(CREATE_COMPANY_USECASE)
     private readonly createCompanyUseCases: UseCase<CreateCompanyUseCases>,
 
-    @Inject(UsecasesModule.GET_ALL_COMPANIES_USECASE)
+    @Inject(GET_ALL_COMPANIES_USECASE)
     private readonly getAllCompaniesUseCases: UseCase<GetAllCompaniesUseCases>,
 
-    @Inject(UsecasesModule.GET_COMPANY_BY_ID_USECASE)
+    @Inject(GET_COMPANY_BY_ID_USECASE)
     private readonly getCompanyByIdUseCases: UseCase<GetCompanyByIdUseCases>,
 
-    @Inject(UsecasesModule.DELETE_COMPANY_BY_ID_USECASE)
+    @Inject(DELETE_COMPANY_BY_ID_USECASE)
     private readonly deleteCompanyByIdUseCases: UseCase<DeleteCompanyByIdUseCases>,
   ) {}
 

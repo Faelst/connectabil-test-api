@@ -1,7 +1,12 @@
 import { JobVacancyModel } from '@/domain/model/job-vacancy.model';
 import { JobVacancy } from '@/infrastructure/config/database/schemas';
+import {
+  CREATE_JOB_VACANCY_USECASE,
+  DELETE_JOB_VACANCY_BY_ID_USECASE,
+  GET_ALL_JOB_VACANCY_USECASE,
+  GET_JOB_VACANCY_BY_ID_USECASE,
+} from '@/infrastructure/usecases/providers/job-vacancy.providers';
 import { UseCase } from '@/infrastructure/usecases/usecases';
-import { UsecasesModule } from '@/infrastructure/usecases/usecases.module';
 import { CreateJobVacancyUseCases } from '@/usecases/job-vacancy/create.usecase';
 import { DeleteJobVacancyByIdUseCases } from '@/usecases/job-vacancy/delete-by-id';
 import { GetAllJobVacancyUseCases } from '@/usecases/job-vacancy/get-all.usecases';
@@ -23,16 +28,16 @@ import { CreateJobVacancyDto } from './job-vacancy.dto';
 @ApiResponse({ status: 500, description: 'Internal error' })
 export class JobVacancyController {
   constructor(
-    @Inject(UsecasesModule.CREATE_JOB_VACANCY_USECASE)
+    @Inject(CREATE_JOB_VACANCY_USECASE)
     private readonly createJobVacancyUseCases: UseCase<CreateJobVacancyUseCases>,
 
-    @Inject(UsecasesModule.GET_ALL_JOB_VACANCY_USECASE)
+    @Inject(GET_ALL_JOB_VACANCY_USECASE)
     private readonly getAllJobVacancyUseCases: UseCase<GetAllJobVacancyUseCases>,
 
-    @Inject(UsecasesModule.GET_JOB_VACANCY_BY_ID_USECASE)
+    @Inject(GET_JOB_VACANCY_BY_ID_USECASE)
     private readonly getJobVacancyByIdUseCases: UseCase<GetJobVacancyByIdUseCases>,
 
-    @Inject(UsecasesModule.DELETE_JOB_VACANCY_BY_ID_USECASE)
+    @Inject(DELETE_JOB_VACANCY_BY_ID_USECASE)
     private readonly deleteJobVacancyByIdUseCases: UseCase<DeleteJobVacancyByIdUseCases>,
   ) {}
 

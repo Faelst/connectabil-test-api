@@ -41,13 +41,13 @@ export class PostNewJobVacancyAssociationUseCases {
       jobVacancyId,
     );
 
-    if (!activeJobVacancy) {
+    if (!activeJobVacancy || !activeJobVacancy.status) {
       this.exceptionService.badRequestException({
         message: 'Job vacancy not found',
       });
     }
 
-    const haveAssociationCreated =
+    const existsAssociation =
       await this.vacancyCompaniesAssociationRepository.findByCompanyIdAndJobVacancyId(
         {
           companyId,
@@ -55,7 +55,7 @@ export class PostNewJobVacancyAssociationUseCases {
         },
       );
 
-    if (haveAssociationCreated) {
+    if (existsAssociation) {
       this.exceptionService.badRequestException({
         message: 'This job vacancy already has a company associated',
       });

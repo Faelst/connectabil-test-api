@@ -8,19 +8,32 @@ export class VacancyCompaniesAssociationRepository
 {
   constructor(
     @InjectModel(VacancyCompaniesAssociation.name)
-    private readonly companiesModel: Model<VacancyCompaniesAssociation>,
+    private readonly vacancyCompaniesAssociation: Model<VacancyCompaniesAssociation>,
   ) {}
 
   async create(vacancyCompaniesAssociation) {
-    await this.companiesModel.create(vacancyCompaniesAssociation);
+    await this.vacancyCompaniesAssociation.create(vacancyCompaniesAssociation);
   }
 
   async findByCompanyIdAndJobVacancyId({ companyId, jobVacancyId }) {
-    const result = await this.companiesModel.findOne({
+    const result = await this.vacancyCompaniesAssociation.findOne({
       companyId,
       jobVacancyId,
+      deleted: false,
     });
 
     return result;
+  }
+
+  async findById(id: string) {
+    const result = await this.vacancyCompaniesAssociation.findById(id);
+    return result;
+  }
+
+  async delete(vacancyCompaniesAssociationId: string) {
+    await this.vacancyCompaniesAssociation.findByIdAndUpdate(
+      vacancyCompaniesAssociationId,
+      { deleted: true, updatedAt: new Date() },
+    );
   }
 }

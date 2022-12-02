@@ -1,11 +1,15 @@
-import { VacancyCompaniesAssociationRepository } from '@/infrastructure/repositories/vacancy-companies-association.repository';
+import {
+  POST_NEW_JOB_VACANCY_ASSOCIATION_USECASE,
+  REMOVE_ASSOCIATION_JOB_USECASE,
+} from '@/infrastructure/usecases/providers/vacancy-companies-association.providers';
 import { UseCase } from '@/infrastructure/usecases/usecases';
-import { UsecasesModule } from '@/infrastructure/usecases/usecases.module';
+
 import {
   PostNewJobVacancyAssociationUseCases,
   PostNewJobVacancyAssociationUseCasesResponse,
 } from '@/usecases/vacancy-companies-association/post-new-job.usecase';
-import { Body, Controller, Inject, Post } from '@nestjs/common';
+import { RemoveAssociationJobUseCases } from '@/usecases/vacancy-companies-association/remove-association-job.usecase';
+import { Body, Controller, Delete, Inject, Param, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PostNewJobVacancyAssociationDto } from './vacancy-companies-association.dto';
 
@@ -14,8 +18,11 @@ import { PostNewJobVacancyAssociationDto } from './vacancy-companies-association
 @ApiResponse({ status: 500, description: 'Internal error' })
 export class VacancyCompaniesAssociationController {
   constructor(
-    @Inject(UsecasesModule.POST_NEW_JOB_VACANCY_ASSOCIATION_USECASE)
+    @Inject(POST_NEW_JOB_VACANCY_ASSOCIATION_USECASE)
     private readonly postNewJobVacancyAssociationUseCases: UseCase<PostNewJobVacancyAssociationUseCases>,
+
+    @Inject(REMOVE_ASSOCIATION_JOB_USECASE)
+    private readonly removeAssociationJobUseCases: UseCase<RemoveAssociationJobUseCases>,
   ) {}
 
   @Post()
@@ -34,5 +41,13 @@ export class VacancyCompaniesAssociationController {
       });
 
     return result;
+  }
+
+  @Delete()
+  @ApiResponse({
+    status: 200,
+  })
+  async delete(@Param('id') id: string): Promise<void> {
+    await this.removeAssociationJobUseCases.getInstance().execute(id);
   }
 }
