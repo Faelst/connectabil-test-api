@@ -7,8 +7,8 @@ WORKDIR /home/node
 COPY . /home/node
 
 RUN npm ci \
-    && npm run build \
-    && npm prune --production
+    && npm i -g nest-cli \
+    && npm run build
 
 FROM node:16.8-alpine3.11
 

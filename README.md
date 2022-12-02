@@ -55,18 +55,24 @@ Todo momento que um commit é feito na branch **master** o Github Actions execut
 
 ## Setup local
 
+É necessário criar um arquivo **local.env** na raiz do projeto, com as seguintes variaveis:
+
+```bash
+$ touch env/local.env
+```
+
+copie o conteudo do arquivo **env/local.env.example** e cole no arquivo **env/local.env**.
+
+```bash
+$ cp env/local.env.example env/local.env
+```
+
 Para poder rodar o projeto localmente, é necessário ter o **Docker** e o **Docker Compose** instalados, para que possa subir os serviços necessários.
 
 ```bash
 $ npm install
-$ docker-compose up -d
-```
-
-Apos instalar as dependencias e subir os serviços, é necessário criar um arquivo **local.env** na raiz do projeto, com as seguintes variaveis:
-
-```bash
-$ touch env/local.env && echo "MONGO_URI=mongodb://localhost:27017/connectabil" >> env/local.env
-
+$ docker-compose build
+$ docker-compose --env-file ./env/local.env up -d
 ```
 
 ## Running the app
