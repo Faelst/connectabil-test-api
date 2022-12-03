@@ -9,7 +9,7 @@ import {
 } from '@/infrastructure/usecases/providers/job-vacancy.providers';
 import { UseCase } from '@/infrastructure/usecases/usecases';
 import { CreateJobVacancyUseCases } from '@/usecases/job-vacancy/create.usecase';
-import { DeleteJobVacancyByIdUseCases } from '@/usecases/job-vacancy/delete-by-id';
+import { DeleteJobVacancyByIdUseCases } from '@/usecases/job-vacancy/delete-by-id.usecase';
 import { GetAllJobVacancyUseCases } from '@/usecases/job-vacancy/get-all.usecases';
 import { GetJobVacancyByIdUseCases } from '@/usecases/job-vacancy/get-by-id.usecase';
 import { UpdateJobVacancyUseCase } from '@/usecases/job-vacancy/update.usecase';
