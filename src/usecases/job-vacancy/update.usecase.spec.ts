@@ -21,7 +21,7 @@ const makeSut = () => {
 };
 
 describe('UpdateJobVacancyUseCase', () => {
-  it('should be defined', () => {
+  it('should be defined.', () => {
     const { sut } = makeSut();
     expect(sut).toBeDefined();
   });

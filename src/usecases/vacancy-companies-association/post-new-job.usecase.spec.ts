@@ -3,7 +3,7 @@ import { PostNewJobVacancyAssociationUseCases } from './post-new-job.usecase';
 class JobVacancyRepositorySpy {
   jobVacancy = {};
 
-  async findById(id: string) {
+  async findById() {
     return this.jobVacancy;
   }
 }

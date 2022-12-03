@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 
 import { EnvironmentConfigModule } from './infrastructure/config/environment-config/environment-config.module';
 import { ExceptionsModule } from '@/infrastructure/exceptions/exceptions.module';

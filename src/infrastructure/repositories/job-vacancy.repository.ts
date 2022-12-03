@@ -1,6 +1,5 @@
 import { IJobVacancyRepository } from '@/domain/repositories';
 import { InjectModel } from '@nestjs/mongoose';
-import { randomUUID } from 'crypto';
 import { Model } from 'mongoose';
 import {
   JobVacancy,

@@ -14,6 +14,12 @@ https://connectabil-test-api.herokuapp.com/
 
 API desenvolvida para o teste da Connectabil, com **CI/CD** utilizando o Github actions e deploy no Heroku + Docker.
 
+<hr>
+
+## CI/CD
+
+Integração contínua e entrega contínua utilizando o Github actions.
+
 No diretório do projeto:
 
 ```
@@ -22,6 +28,14 @@ No diretório do projeto:
 
 voce encontra os arquivos de configuração do Github Actions.
 Todo momento que um commit é feito na branch **master** o Github Actions executa o pipeline de deploy no Heroku em um container Docker.
+
+<hr>
+
+## Husky
+
+Uma ferramenta para executar scripts git hooks com facilidade. No projeto foi utilizado para executar o lint antes de cada commit, para garantir que o código esteja de acordo com as regras do eslint e prettier. Tambem foi utilizado para executar o comando de testes antes de cada push, para garantir que os testes estejam passando apos cada commit.
+
+Para mais informações acesse: [Husky](https://typicode.github.io/husky/#/)
 
 <hr>
 
@@ -36,6 +50,7 @@ Todo momento que um commit é feito na branch **master** o Github Actions execut
 - Jest
 - Github Actions
 - Heroku
+- Husky
 
 <hr>
 
@@ -52,6 +67,8 @@ Todo momento que um commit é feito na branch **master** o Github Actions execut
 - Continuous Integration
 - Continuous Delivery
 - Continuous Deployment
+
+<hr>
 
 ## Setup local
 
