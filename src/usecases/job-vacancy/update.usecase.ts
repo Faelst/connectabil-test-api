@@ -5,6 +5,14 @@ export class UpdateJobVacancyUseCase {
   constructor(private readonly jobVacancyRepository: JobVacancyRepository) {}
 
   async execute(jobVacancyId: string, jobVacancy: UpdateJobVacancyDto) {
+    const jobVacancyExists = await this.jobVacancyRepository.findById(
+      jobVacancyId,
+    );
+
+    if (!jobVacancyExists) {
+      throw new Error('Job vacancy not found');
+    }
+
     const result = await this.jobVacancyRepository.update(
       jobVacancyId,
       jobVacancy,

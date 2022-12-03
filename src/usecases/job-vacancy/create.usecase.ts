@@ -1,6 +1,6 @@
 import { JobVacancyModel } from '@/domain/model/job-vacancy.model';
-import { JobVacancy } from '@/infrastructure/config/database/schemas';
 import { JobVacancyRepository } from '@/infrastructure/repositories/job-vacancy.repository';
+import { JobVacancy } from '../../infrastructure/config/database/schemas';
 
 export class CreateJobVacancyUseCases {
   constructor(private readonly JobVacancyRepository: JobVacancyRepository) {}
