@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, isString, IsString } from 'class-validator';
 
 export class CreateCompanyDto {
   @ApiProperty()
@@ -11,6 +11,31 @@ export class CreateCompanyDto {
   @IsString()
   @IsNotEmpty()
   address: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  zip: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  state: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  city: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  neighborhood: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  number: string;
 
   @ApiProperty()
   @IsBoolean()

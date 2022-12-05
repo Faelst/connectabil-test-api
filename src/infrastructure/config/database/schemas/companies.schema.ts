@@ -11,6 +11,21 @@ export class Companies {
   @Prop({ type: String, required: true })
   address: string;
 
+  @Prop({ type: String, required: true })
+  zip: string;
+
+  @Prop({ type: String, required: true })
+  state: string;
+
+  @Prop({ type: String, required: true })
+  city: string;
+
+  @Prop({ type: String, required: true })
+  neighborhood: string;
+
+  @Prop({ type: String, required: true })
+  number: string;
+
   @Prop({ type: Boolean, default: true })
   status: boolean;
 

@@ -12,6 +12,11 @@ export class CreateCompanyUseCases {
     company.name = content.name;
     company.address = content.address;
     company.status = content.status;
+    company.zip = content.zip;
+    company.state = content.state;
+    company.city = content.city;
+    company.neighborhood = content.neighborhood;
+    company.number = content.number;
 
     const result = await this.companyRepository.create(company as any);
 

@@ -1,3 +1,4 @@
+import { ExceptionsService } from '@/infrastructure/exceptions/exceptions.service';
 import { JobVacancyRepository } from '@/infrastructure/repositories/job-vacancy.repository';
 import { CreateJobVacancyUseCases } from '@/usecases/job-vacancy/create.usecase';
 import { DeleteJobVacancyByIdUseCases } from '@/usecases/job-vacancy/delete-by-id.usecase';
@@ -35,11 +36,17 @@ export const jobVacancyUseCaseProviders = [
     },
   },
   {
-    inject: [JobVacancyRepository],
+    inject: [JobVacancyRepository, ExceptionsService],
     provide: DELETE_JOB_VACANCY_BY_ID_USECASE,
-    useFactory: (JobVacancyRepository: JobVacancyRepository) => {
+    useFactory: (
+      JobVacancyRepository: JobVacancyRepository,
+      exceptionService: ExceptionsService,
+    ) => {
       return new UseCase(
-        new DeleteJobVacancyByIdUseCases(JobVacancyRepository),
+        new DeleteJobVacancyByIdUseCases(
+          JobVacancyRepository,
+          exceptionService,
+        ),
       );
     },
   },
