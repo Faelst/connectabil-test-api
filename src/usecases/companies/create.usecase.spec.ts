@@ -31,6 +31,11 @@ describe('CreateCompanyUseCases', () => {
       _id: 'any_id',
       name: 'any_name',
       address: 'any_address',
+      zip: 'any_zip',
+      state: 'any_state',
+      city: 'any_city',
+      neighborhood: 'any_neighborhood',
+      number: 'any_number',
       status: true,
       createdAt: new Date(),
     };
@@ -40,6 +45,11 @@ describe('CreateCompanyUseCases', () => {
     expect(company).toEqual({
       name: 'any_name',
       address: 'any_address',
+      zip: 'any_zip',
+      state: 'any_state',
+      city: 'any_city',
+      neighborhood: 'any_neighborhood',
+      number: 'any_number',
       status: true,
     });
   });
